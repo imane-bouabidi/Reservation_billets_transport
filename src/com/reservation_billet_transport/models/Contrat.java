@@ -29,6 +29,17 @@ public class Contrat {
         this.statutContrat = statutContrat;
     }
 
+    public Contrat(Partenaire partenaire, Date dateDebut, Date dateFin, double tarifSpecial, String conditionsAccord, boolean renouvlable, StatutContrat statutContrat) {
+        this.partenaire = partenaire;
+        this.dateDebut = dateDebut;
+        this.dateFin = dateFin;
+        this.tarifSpecial = tarifSpecial;
+        this.conditionsAccord = conditionsAccord;
+        this.renouvlable = renouvlable;
+        this.statutContrat = statutContrat;
+    }
+    
+    
     public UUID getId() {
         return id;
     }

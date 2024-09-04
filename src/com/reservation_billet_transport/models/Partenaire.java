@@ -18,9 +18,18 @@ public class Partenaire {
 
     private ArrayList<Contrat> contrats;
 
-    public Partenaire(UUID id, String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
+    public Partenaire(String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
+            String zoneGeographique, String conditionsSpeciales, StatutPartenaire statutPartenaire) {
+	this.nomCompagnie = nomCompagnie;
+	this.contactCommercial = contactCommercial;
+	this.typeTransport = typeTransport;
+	this.zoneGeographique = zoneGeographique;
+	this.conditionsSpeciales = conditionsSpeciales;
+	this.statutPartenaire = statutPartenaire;
+	}
+    
+    public Partenaire(String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
                       String zoneGeographique, String conditionsSpeciales, StatutPartenaire statutPartenaire, Date dateCreation) {
-        this.id = id;
         this.nomCompagnie = nomCompagnie;
         this.contactCommercial = contactCommercial;
         this.typeTransport = typeTransport;
@@ -29,13 +38,21 @@ public class Partenaire {
         this.statutPartenaire = statutPartenaire;
         this.dateCreation = dateCreation;
     }
+    
+    public Partenaire(UUID id,String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
+            String zoneGeographique, String conditionsSpeciales, StatutPartenaire statutPartenaire, Date dateCreation) {
+		this.id = id;
+		this.nomCompagnie = nomCompagnie;
+		this.contactCommercial = contactCommercial;
+		this.typeTransport = typeTransport;
+		this.zoneGeographique = zoneGeographique;
+		this.conditionsSpeciales = conditionsSpeciales;
+		this.statutPartenaire = statutPartenaire;
+		this.dateCreation = dateCreation;
+	}
 
     public UUID getId() {
         return id;
-    }
-
-    public void setId(UUID id) {
-        this.id = id;
     }
 
     public String getNomCompagnie() {
