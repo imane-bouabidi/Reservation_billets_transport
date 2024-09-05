@@ -20,16 +20,15 @@ public class ContratDAO {
     }
 
     public void addContrat(Contrat contrat) {
-        String query = "INSERT INTO contrat (id, partenaireId, dateDebut, dateFin, tarifSpecial, conditionsAccord, renouvelable, statutContrat) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO contrat (partenaireId, dateDebut, dateFin, tarifSpecial, conditionsAccord, renouvelable, statutContrat) VALUES ( ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setObject(1, contrat.getId());
-            stmt.setObject(2, contrat.getPartenaire().getId());
-            stmt.setDate(3, new Date(contrat.getDateDebut().getTime()));
-            stmt.setDate(4, contrat.getDateFin() != null ? new Date(contrat.getDateFin().getTime()) : null);
-            stmt.setDouble(5, contrat.getTarifSpecial());
-            stmt.setString(6, contrat.getConditionsAccord());
-            stmt.setBoolean(7, contrat.isRenouvlable());
-            stmt.setString(8, contrat.getStatutContrat().toString());
+            stmt.setObject(1, contrat.getPartenaire().getId());
+            stmt.setDate(2, new Date(contrat.getDateDebut().getTime()));
+            stmt.setDate(3, contrat.getDateFin() != null ? new Date(contrat.getDateFin().getTime()) : null);
+            stmt.setDouble(4, contrat.getTarifSpecial());
+            stmt.setString(5, contrat.getConditionsAccord());
+            stmt.setBoolean(6, contrat.isRenouvlable());
+            stmt.setString(7, contrat.getStatutContrat().toString());
 
             stmt.executeUpdate();
             System.out.println("Contrat ajouté avec succès.");
@@ -51,6 +50,7 @@ public class ContratDAO {
             stmt.setObject(8, contrat.getId());
 
             stmt.executeUpdate();
+            
             System.out.println("Contrat mis à jour avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();

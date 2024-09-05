@@ -21,18 +21,17 @@ public class PromosDAO {
     }
 
     public void addPromo(Promos promo) {
-        String query = "INSERT INTO promos (id, nomOffre, description, dateDebut, dateFin, typeReduction, valeurReduction, conditions, statutOffre, contratId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO promos (nomOffre, description, dateDebut, dateFin, typeReduction, valeurReduction, conditions, statutOffre, contratId) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setObject(1, promo.getId());
-            stmt.setString(2, promo.getNomOffre());
-            stmt.setString(3, promo.getDescription());
-            stmt.setDate(4, new Date(promo.getDateDebut().getTime()));
-            stmt.setDate(5, promo.getDateFin() != null ? new Date(promo.getDateFin().getTime()) : null);
-            stmt.setString(6, promo.getTypeReduction().toString());
-            stmt.setDouble(7, promo.getValeurReduction());
-            stmt.setString(8, promo.getConditions());
-            stmt.setString(9, promo.getStatutOffre().toString());
-            stmt.setObject(10, promo.getContrat().getId());
+            stmt.setString(1, promo.getNomOffre());
+            stmt.setString(2, promo.getDescription());
+            stmt.setDate(3, new Date(promo.getDateDebut().getTime()));
+            stmt.setDate(4, promo.getDateFin() != null ? new Date(promo.getDateFin().getTime()) : null);
+            stmt.setString(5, promo.getTypeReduction().toString());
+            stmt.setDouble(6, promo.getValeurReduction());
+            stmt.setString(7, promo.getConditions());
+            stmt.setString(8, promo.getStatutOffre().toString());
+            stmt.setObject(9, promo.getContrat().getId());
 
             stmt.executeUpdate();
             System.out.println("Promo ajoutée avec succès.");
@@ -80,10 +79,9 @@ public class PromosDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-            	
-            	ContratDAO contratDAO = new ContratDAO();
+                ContratDAO contratDAO = new ContratDAO();
                 Contrat contrat = contratDAO.getContratById(rs.getObject("contratId", UUID.class));
-            	
+
                 Promos promo = new Promos(
                     rs.getObject("id", UUID.class),
                     contrat,

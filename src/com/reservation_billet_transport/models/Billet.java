@@ -24,6 +24,15 @@ public class Billet {
         this.dateVente = dateVente;
         this.statutBillet = statutBillet;
     }
+    
+    public Billet( Contrat contrat, TypeTransport typeTransport, double prixAchat, double prixVente, Timestamp dateVente, StatutBillet statutBillet) {
+        this.contrat = contrat;
+        this.typeTransport = typeTransport;
+        this.prixAchat = prixAchat;
+        this.prixVente = prixVente;
+        this.dateVente = dateVente;
+        this.statutBillet = statutBillet;
+    }
 
     public UUID getId() {
         return id;
