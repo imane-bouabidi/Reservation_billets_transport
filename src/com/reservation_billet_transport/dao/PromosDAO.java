@@ -27,14 +27,13 @@ public class PromosDAO {
             stmt.setString(2, promo.getDescription());
             stmt.setDate(3, new Date(promo.getDateDebut().getTime()));
             stmt.setDate(4, promo.getDateFin() != null ? new Date(promo.getDateFin().getTime()) : null);
-            stmt.setString(5, promo.getTypeReduction().toString());
+            stmt.setObject(5, promo.getTypeReduction(), java.sql.Types.OTHER);
             stmt.setDouble(6, promo.getValeurReduction());
             stmt.setString(7, promo.getConditions());
-            stmt.setString(8, promo.getStatutOffre().toString());
+            stmt.setObject(8, promo.getStatutOffre(), java.sql.Types.OTHER);
             stmt.setObject(9, promo.getContrat().getId());
 
             stmt.executeUpdate();
-            System.out.println("Promo ajoutée avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -47,15 +46,14 @@ public class PromosDAO {
             stmt.setString(2, promo.getDescription());
             stmt.setDate(3, new Date(promo.getDateDebut().getTime()));
             stmt.setDate(4, promo.getDateFin() != null ? new Date(promo.getDateFin().getTime()) : null);
-            stmt.setString(5, promo.getTypeReduction().toString());
+            stmt.setObject(5, promo.getTypeReduction(), java.sql.Types.OTHER);
             stmt.setDouble(6, promo.getValeurReduction());
             stmt.setString(7, promo.getConditions());
-            stmt.setString(8, promo.getStatutOffre().toString());
+            stmt.setObject(8, promo.getStatutOffre(), java.sql.Types.OTHER);
             stmt.setObject(9, promo.getContrat().getId());
             stmt.setObject(10, promo.getId());
 
             stmt.executeUpdate();
-            System.out.println("Promo mise à jour avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -66,7 +64,6 @@ public class PromosDAO {
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setObject(1, id);
             stmt.executeUpdate();
-            System.out.println("Promo supprimée avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

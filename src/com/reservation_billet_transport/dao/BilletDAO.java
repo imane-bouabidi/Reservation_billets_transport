@@ -23,17 +23,15 @@ public class BilletDAO {
     }
 
     public void addBillet(Billet billet) {
-        String query = "INSERT INTO billet (id, contratId, typeTransport, prixAchat, prixVente, dateVente, statutBillet) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String query = "INSERT INTO billet (contratId, typeTransport, prixAchat, prixVente, dateVente, statutBillet) VALUES (?, ?, ?, ?, ?, ?)";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
-            stmt.setObject(1, billet.getId());
-            stmt.setObject(2, billet.getContrat().getId());
-            stmt.setString(3, billet.getTypeTransport().name());
-            stmt.setDouble(4, billet.getPrixAchat());
-            stmt.setDouble(5, billet.getPrixVente());
-            stmt.setTimestamp(6, billet.getDateVente());
-            stmt.setString(7, billet.getStatutBillet().name());
+            stmt.setObject(1, billet.getContrat().getId());
+            stmt.setObject(2, billet.getTypeTransport(), java.sql.Types.OTHER);
+            stmt.setDouble(3, billet.getPrixAchat());
+            stmt.setDouble(4, billet.getPrixVente());
+            stmt.setTimestamp(5, billet.getDateVente());
+            stmt.setObject(6, billet.getStatutBillet(), java.sql.Types.OTHER);
             stmt.executeUpdate();
-            System.out.println("Billet ajouté avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -43,14 +41,13 @@ public class BilletDAO {
         String query = "UPDATE billet SET contratId = ?, typeTransport = ?, prixAchat = ?, prixVente = ?, dateVente = ?, statutBillet = ? WHERE id = ?";
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setObject(1, billet.getContrat().getId());
-            stmt.setString(2, billet.getTypeTransport().name());
+            stmt.setObject(2, billet.getTypeTransport(), java.sql.Types.OTHER);
             stmt.setDouble(3, billet.getPrixAchat());
             stmt.setDouble(4, billet.getPrixVente());
             stmt.setTimestamp(5, billet.getDateVente());
-            stmt.setString(6, billet.getStatutBillet().name());
+            stmt.setObject(6, billet.getStatutBillet(), java.sql.Types.OTHER);
             stmt.setObject(7, billet.getId());
             stmt.executeUpdate();
-            System.out.println("Billet mis à jour avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

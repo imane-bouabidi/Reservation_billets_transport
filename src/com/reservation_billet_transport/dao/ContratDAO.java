@@ -28,10 +28,9 @@ public class ContratDAO {
             stmt.setDouble(4, contrat.getTarifSpecial());
             stmt.setString(5, contrat.getConditionsAccord());
             stmt.setBoolean(6, contrat.isRenouvlable());
-            stmt.setString(7, contrat.getStatutContrat().toString());
+            stmt.setObject(7, contrat.getStatutContrat(), java.sql.Types.OTHER);
 
             stmt.executeUpdate();
-            System.out.println("Contrat ajouté avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -46,12 +45,11 @@ public class ContratDAO {
             stmt.setDouble(4, contrat.getTarifSpecial());
             stmt.setString(5, contrat.getConditionsAccord());
             stmt.setBoolean(6, contrat.isRenouvlable());
-            stmt.setString(7, contrat.getStatutContrat().toString());
+            stmt.setObject(7, contrat.getStatutContrat(), java.sql.Types.OTHER);
             stmt.setObject(8, contrat.getId());
 
             stmt.executeUpdate();
             
-            System.out.println("Contrat mis à jour avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -62,7 +60,6 @@ public class ContratDAO {
         try (PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setObject(1, id);
             stmt.executeUpdate();
-            System.out.println("Contrat supprimé avec succès.");
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,6 @@
 package Application;
 
+import com.reservation_billet_transport.enums.StatutContrat;
 import com.reservation_billet_transport.enums.StatutOffre;
 import com.reservation_billet_transport.enums.TypeReduction;
 import com.reservation_billet_transport.models.Contrat;
@@ -57,9 +58,8 @@ public class PromoMenu {
                         System.out.println("Entrez la date de fin de la promotion (YYYY-MM-DD, laisser vide pour aucune fin):");
                         String dateFinStr = scanner.nextLine();
                         Date dateFin = dateFinStr.isEmpty() ? null : Date.valueOf(dateFinStr);
-
-                        System.out.println("Entrez le type de réduction (par exemple, POURCENTAGE, MONTANT):");
-                        TypeReduction typeReduction = TypeReduction.valueOf(scanner.nextLine().toUpperCase());
+                        
+                        TypeReduction typeReduction = promoService.getTypeReduction();
 
                         System.out.println("Entrez la valeur de la réduction:");
                         double valeurReduction = scanner.nextDouble();
@@ -68,8 +68,7 @@ public class PromoMenu {
                         System.out.println("Entrez les conditions de la promotion:");
                         String conditions = scanner.nextLine();
 
-                        System.out.println("Entrez le statut de la promotion (ACTIF, INACTIF):");
-                        StatutOffre statutOffre = StatutOffre.valueOf(scanner.nextLine().toUpperCase());
+                        StatutOffre statutOffre = promoService.getStatutOffre();
 
                         Promos promo = new Promos(
                                 contrat,
@@ -125,11 +124,7 @@ public class PromoMenu {
                             promo.setDateFin(Date.valueOf(dateFinStr));
                         }
 
-                        System.out.println("Entrez le nouveau type de réduction (laisser vide pour ne pas modifier):");
-                        String typeReductionStr = scanner.nextLine();
-                        if (!typeReductionStr.isEmpty()) {
-                            promo.setTypeReduction(TypeReduction.valueOf(typeReductionStr.toUpperCase()));
-                        }
+                        TypeReduction typeReduction = promoService.getTypeReduction(promo);
 
                         System.out.println("Entrez la nouvelle valeur de la réduction (laisser vide pour ne pas modifier):");
                         String valeurReductionStr = scanner.nextLine();
@@ -143,11 +138,7 @@ public class PromoMenu {
                             promo.setConditions(conditions);
                         }
 
-                        System.out.println("Entrez le nouveau statut de la promotion (laisser vide pour ne pas modifier):");
-                        String statutOffreStr = scanner.nextLine();
-                        if (!statutOffreStr.isEmpty()) {
-                            promo.setStatutOffre(StatutOffre.valueOf(statutOffreStr.toUpperCase()));
-                        }
+                        StatutOffre statutOffre = promoService.getStatutOffre(promo);
 
                         promoService.updatePromo(promo);
                         System.out.println("Promotion mise à jour avec succès.");

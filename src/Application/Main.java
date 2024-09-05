@@ -12,7 +12,9 @@ public class Main {
             System.out.println("Menu principal :");
             System.out.println("1. Gestion des partenaires");
             System.out.println("2. Gestion des contrats");
-            System.out.println("3. Quitter");
+            System.out.println("3. Gestion des promos");
+            System.out.println("4. Gestion des billets");
+            System.out.println("5. Quitter");
 
             int choix = scanner.nextInt();
             scanner.nextLine();
@@ -25,6 +27,12 @@ public class Main {
                     ContratMenu.display();
                     break;
                 case 3:
+                    PromoMenu.display();
+                    break;
+                case 4:
+                    BilletMenu.display();
+                    break;
+                case 5:
                     running = false;
                     System.out.println("Au revoir !");
                     break;

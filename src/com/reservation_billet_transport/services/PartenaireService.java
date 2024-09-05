@@ -71,7 +71,7 @@ public class PartenaireService {
     	StatutPartenaire statutPartenaire = null;
     	int choix;
     	Scanner scanner = new Scanner(System.in);
-    	System.out.println("Choisisez le Statut du partenaire => 1 : actif , 2 : inactif, 3 : suspendu ");
+    	System.out.println("Choisisez le Statut du partenaire => 1 : actif , 2 : inactif, 3 : suspendu, 0 : aucun changement ");
     	choix = scanner.nextInt();
         switch (choix) {            
         case 1: 
