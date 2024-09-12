@@ -18,6 +18,11 @@ public class Contrat {
     private ArrayList<Billet> billets;
     private ArrayList<Promos> promos;
 
+
+    public Contrat() {
+
+    }
+    
     public Contrat(UUID id,Partenaire partenaire, Date dateDebut, Date dateFin, double tarifSpecial, String conditionsAccord, boolean renouvlable, StatutContrat statutContrat) {
         this.id = id;
         this.partenaire = partenaire;
@@ -29,16 +34,6 @@ public class Contrat {
         this.statutContrat = statutContrat;
     }
 
-    public Contrat(Partenaire partenaire, Date dateDebut, Date dateFin, double tarifSpecial, String conditionsAccord, boolean renouvlable, StatutContrat statutContrat) {
-        this.partenaire = partenaire;
-        this.dateDebut = dateDebut;
-        this.dateFin = dateFin;
-        this.tarifSpecial = tarifSpecial;
-        this.conditionsAccord = conditionsAccord;
-        this.renouvlable = renouvlable;
-        this.statutContrat = statutContrat;
-    }
-    
     
     public UUID getId() {
         return id;

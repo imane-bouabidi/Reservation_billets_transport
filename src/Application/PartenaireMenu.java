@@ -1,8 +1,12 @@
 package Application;
 
 import com.reservation_billet_transport.enums.*;
+import com.reservation_billet_transport.models.Contrat;
 import com.reservation_billet_transport.models.Partenaire;
 import com.reservation_billet_transport.services.*;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 import java.util.UUID;
 
@@ -14,7 +18,7 @@ public class PartenaireMenu {
         boolean back = false;
 
         while (!back) {
-        	System.out.println("1. Afficher tous les partenaires");
+        	System.out.println("1. Afficher partenaire by Id");
             System.out.println("2. Ajouter un nouveau partenaire");
             System.out.println("3. Modifier un partenaire");
             System.out.println("4. Supprimer un partenaire");
@@ -26,6 +30,11 @@ public class PartenaireMenu {
 
             switch (choix) {
             	case 1:
+            		System.out.println("Entrez l'id du partenaire:");
+					  UUID Pid = UUID.fromString(scanner.nextLine());
+            		Partenaire partner = partenaireService.getPartenaireById(Pid);
+            		afficherPartenaire(partner);
+            		break;
                 case 2:
                 	try {
 					System.out.println("Entrez le nom de la compagnie:");
@@ -44,7 +53,13 @@ public class PartenaireMenu {
 					  
 					  StatutPartenaire statutPartenaire = partenaireService.getStatutPartenaire();
 					  
-					  Partenaire partenaire = new Partenaire(nomCompagnie, contactCommercial, typeTransport, zoneGeographique, conditionsSpeciales, statutPartenaire);					
+					  Partenaire partenaire = new Partenaire();
+					  partenaire.setNomCompagnie(nomCompagnie);
+					  partenaire.setContactCommercial(contactCommercial);
+					  partenaire.setZoneGeographique(zoneGeographique);
+					  partenaire.setConditionsSpeciales(conditionsSpeciales);
+					  partenaire.setStatutPartenaire(statutPartenaire);
+					  partenaire.setTypeTransport(typeTransport);
 					  
 					  if (partenaireService.addPartenaire(partenaire)) {
 					      System.out.println("Partenaire ajouté avec succès.");
@@ -110,5 +125,27 @@ public class PartenaireMenu {
             }
         }
     }
+    public static void afficherPartenaire(Partenaire partenaire) {
+    	System.out.println("Nom de la compagnie : " + partenaire.getNomCompagnie());
+    	System.out.println("Contact commercial : " + partenaire.getContactCommercial());
+    	System.out.println("Type de transport : " + partenaire.getTypeTransport());
+    	System.out.println("Zone géographique : " + partenaire.getZoneGeographique());
+    	System.out.println("Conditions spéciales : " + partenaire.getConditionsSpeciales());
+    	System.out.println("Statut partenaire : " + partenaire.getStatutPartenaire());
+    	System.out.println("Date de création : " + partenaire.getDateCreation());
+    	System.out.println("--------------------------------------------------------------");
+    	System.out.println("------------------------------- Contrats :-------------------------------");
+    	List<Contrat> contrats =  new ArrayList<>();
+    	contrats = partenaire.getContrats();
+    	for(Contrat contrat : contrats) {    		
+    		System.out.println("Id : "+contrat.getId());
+    		System.out.println("Conditions : "+contrat.getConditionsAccord());
+    		System.out.println("Tarifs : "+contrat.getTarifSpecial());
+    		System.out.println("Date debut : "+contrat.getDateDebut());
+    		System.out.println("Date fin : "+contrat.getDateFin());
+    		System.out.println("Statut : "+contrat.getStatutContrat());
+    	}
+    }
 }
+
 

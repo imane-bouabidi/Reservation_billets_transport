@@ -75,7 +75,13 @@ public class BilletMenu {
 
         StatutBillet statutBillet = billetService.getStatutBillet();
 
-        Billet billet = new Billet(contrat, typeTransport, prixAchat, prixVente, dateVente, statutBillet);
+        Billet billet = new Billet();
+        billet.setContrat(contrat);
+        billet.setTypeTransport(typeTransport);
+        billet.setPrixAchat(prixAchat);
+        billet.setPrixVente(prixVente);
+        billet.setDateVente(dateVente);
+        billet.setStatutBillet(statutBillet);
         billetService.addBillet(billet);
 
         System.out.println("Billet ajouté avec succès.");

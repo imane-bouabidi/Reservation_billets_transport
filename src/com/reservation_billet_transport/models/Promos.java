@@ -33,17 +33,7 @@ public class Promos {
         this.statutOffre = statutOffre;
     }
     
-    public Promos(Contrat contrat, String nomOffre, String description, Date dateDebut, Date dateFin,
-            TypeReduction typeReduction, double valeurReduction, String conditions, StatutOffre statutOffre) {
-		  this.contrat = contrat;
-		  this.nomOffre = nomOffre;
-		  this.description = description;
-		  this.dateDebut = dateDebut;
-		  this.dateFin = dateFin;
-		  this.typeReduction = typeReduction;
-		  this.valeurReduction = valeurReduction;
-		  this.conditions = conditions;
-		  this.statutOffre = statutOffre;
+    public Promos() {
 		}
 
 

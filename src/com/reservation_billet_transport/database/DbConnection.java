@@ -29,15 +29,5 @@ public class DbConnection {
         return connection;
     }
 
-    public void closeConnection() {
-        if (connection != null) {
-            try {
-                connection.close();
-                System.out.println("Connection closed successfully!");
-            } catch (SQLException e) {
-                System.err.println("Failed to close connection!");
-                e.printStackTrace();
-            }
-        }
-    }
+
 }

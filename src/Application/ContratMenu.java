@@ -65,7 +65,13 @@ public class ContratMenu {
 
                         StatutContrat statutContrat = contratService.getStatutContrat();
 
-                        Contrat contrat = new Contrat(partenaire, dateDebut, dateFin, tarifSpecial, conditionsAccord, renouvlable, statutContrat);
+                        Contrat contrat = new Contrat();
+                        contrat.setConditionsAccord(conditionsAccord);
+                        contrat.setDateDebut(dateDebut);
+                        contrat.setDateFin(dateFin);
+                        contrat.setTarifSpecial(tarifSpecial);
+                        contrat.setRenouvlable(renouvlable);
+                        contrat.setStatutContrat(statutContrat);
 
                         contratService.addContrat(contrat);
                         System.out.println("Contrat ajouté avec succès.");

@@ -1,6 +1,7 @@
 package Application;
 
 import com.reservation_billet_transport.enums.StatutContrat;
+
 import com.reservation_billet_transport.enums.StatutOffre;
 import com.reservation_billet_transport.enums.TypeReduction;
 import com.reservation_billet_transport.models.Contrat;
@@ -70,18 +71,16 @@ public class PromoMenu {
 
                         StatutOffre statutOffre = promoService.getStatutOffre();
 
-                        Promos promo = new Promos(
-                                contrat,
-                                nomOffre,
-                                description,
-                                dateDebut,
-                                dateFin,
-                                typeReduction,
-                                valeurReduction,
-                                conditions,
-                                statutOffre
-                        );
-
+                        Promos promo = new Promos();
+                        promo.setConditions(conditions);
+                        promo.setContrat(contrat);
+                        promo.setDateDebut(dateDebut);
+                        promo.setDateFin(dateFin);
+                        promo.setDescription(description);
+                        promo.setNomOffre(nomOffre);
+                        promo.setStatutOffre(statutOffre);
+                        promo.setTypeReduction(typeReduction);
+                        promo.setValeurReduction(valeurReduction);
                         promoService.addPromo(promo);
                         System.out.println("Promotion ajoutée avec succès.");
 

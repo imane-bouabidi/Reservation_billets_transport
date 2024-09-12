@@ -2,6 +2,7 @@ package com.reservation_billet_transport.models;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import com.reservation_billet_transport.enums.StatutPartenaire;
 import com.reservation_billet_transport.enums.TypeTransport;
@@ -15,29 +16,11 @@ public class Partenaire {
     private String conditionsSpeciales;
     private StatutPartenaire statutPartenaire;
     private Date dateCreation;
-
     private ArrayList<Contrat> contrats;
-
-    public Partenaire(String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
-            String zoneGeographique, String conditionsSpeciales, StatutPartenaire statutPartenaire) {
-	this.nomCompagnie = nomCompagnie;
-	this.contactCommercial = contactCommercial;
-	this.typeTransport = typeTransport;
-	this.zoneGeographique = zoneGeographique;
-	this.conditionsSpeciales = conditionsSpeciales;
-	this.statutPartenaire = statutPartenaire;
-	}
     
-    public Partenaire(String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
-                      String zoneGeographique, String conditionsSpeciales, StatutPartenaire statutPartenaire, Date dateCreation) {
-        this.nomCompagnie = nomCompagnie;
-        this.contactCommercial = contactCommercial;
-        this.typeTransport = typeTransport;
-        this.zoneGeographique = zoneGeographique;
-        this.conditionsSpeciales = conditionsSpeciales;
-        this.statutPartenaire = statutPartenaire;
-        this.dateCreation = dateCreation;
-    }
+    public Partenaire() {
+
+	}
     
     public Partenaire(UUID id,String nomCompagnie, String contactCommercial, TypeTransport typeTransport, 
             String zoneGeographique, String conditionsSpeciales, StatutPartenaire statutPartenaire, Date dateCreation) {
@@ -53,6 +36,9 @@ public class Partenaire {
 
     public UUID getId() {
         return id;
+    }
+    public void setId(UUID id) {
+    	this.id= id;
     }
 
     public String getNomCompagnie() {
@@ -115,7 +101,7 @@ public class Partenaire {
         return contrats;
     }
 
-    public void setContrats(ArrayList<Contrat> contrats) {
-        this.contrats = contrats;
+    public void setContrats(List<Contrat> contrats) {
+        this.contrats = new ArrayList<>(contrats);
     }
 }
