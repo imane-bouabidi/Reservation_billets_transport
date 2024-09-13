@@ -14,6 +14,11 @@ public class Billet {
     private double prixVente;
     private Timestamp dateVente;
     private StatutBillet statutBillet;
+    private Trajet trajet;
+
+    public Billet() {
+    	
+    }
 
     public Billet(UUID id, Contrat contrat, TypeTransport typeTransport, double prixAchat, double prixVente, Timestamp dateVente, StatutBillet statutBillet) {
         this.id = id;
@@ -25,9 +30,6 @@ public class Billet {
         this.statutBillet = statutBillet;
     }
     
-    public Billet() {
-
-    }
 
     public UUID getId() {
         return id;
@@ -84,4 +86,14 @@ public class Billet {
     public void setStatutBillet(StatutBillet statutBillet) {
         this.statutBillet = statutBillet;
     }
+
+	public Trajet getTrajet() {
+		return trajet;
+	}
+
+	public void setTrajet(Trajet trajet) {
+		this.trajet = trajet;
+	}
+    
+    
 }
