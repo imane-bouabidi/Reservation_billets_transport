@@ -15,9 +15,9 @@ public class UserService {
         return userDAO.validerUser(email);
     }
 
-//    public List<User> getAllUsers() {
-//        return userDAO.getAllUsers();
-//    }
+    public List<User> getAllUsers() {
+        return userDAO.getAllUsers();
+    }
 
     public void updateUser(User user) {
         userDAO.updateUser(user);

@@ -98,6 +98,29 @@ public class UserDAO {
 			return false;
 		}
 	}
+	
+	public List<User> getAllUsers(){
+		List<User> users = new ArrayList<>();
+		String query = "select * from client";
+		try(PreparedStatement stmt = conn.prepareStatement(query)){
+			ResultSet rs = stmt.executeQuery();
+			if(rs.next()) {
+				User user = new User(
+						UUID.fromString(rs.getString("id")),
+						rs.getString("name"),
+						rs.getString("prenom"),
+						rs.getNString("email"),
+						rs.getNString("phone")
+						);
+				users.add(user);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}
+		return users;
+	}
+	
 	public List<Reservation> getReservations(UUID clientId) {
 		List<Reservation> reservations = new ArrayList<>();
 		String query = "select reservation.id as res_id, date_reservation, client_id, statut_reservation, billet_id from reservation join client on reservation.client_id = client.id where client.id = ?";
