@@ -21,6 +21,8 @@ public class BilletDAO {
     public BilletDAO() {
         this.conn = DbConnection.getInstance().getConnection();
     }
+    ContratDAO contratDAO = new ContratDAO();
+    TrajetDAO trajetDAO = new TrajetDAO();
 
     public void addBillet(Billet billet) {
         String query = "INSERT INTO billet (contratId, typeTransport, prixAchat, prixVente, dateVente, statutBillet) VALUES (?, ?, ?, ?, ?, ?)";
@@ -71,7 +73,6 @@ public class BilletDAO {
             ResultSet rs = stmt.executeQuery();
 
             if (rs.next()) {
-                ContratDAO contratDAO = new ContratDAO();
                 Contrat contrat = contratDAO.getContratById(rs.getObject("contratId", UUID.class));
 
                 return new Billet(
@@ -97,7 +98,6 @@ public class BilletDAO {
             ResultSet rs = stmt.executeQuery();
 
             while (rs.next()) {
-                ContratDAO contratDAO = new ContratDAO();
                 Contrat contrat = contratDAO.getContratById(rs.getObject("contratId", UUID.class));
 
                 Billet billet = new Billet(
@@ -116,4 +116,34 @@ public class BilletDAO {
         }
         return billets;
     }
+    
+    
+    public List<Billet> findBilletsByTrajet(UUID trajetId){
+        List<Billet> billets = new ArrayList<>();
+        String query = "SELECT * FROM billets WHERE trajet_id = ?";
+        try (PreparedStatement statement = conn.prepareStatement(query)) {
+            statement.setObject(1, trajetId);
+            ResultSet rs = statement.executeQuery();
+                while (rs.next()) {
+                    Contrat contrat = contratDAO.getContratById(rs.getObject("contratId", UUID.class));
+                    Billet b = new Billet(
+                    		rs.getObject("id", UUID.class),
+                            contrat,
+                            TypeTransport.valueOf(rs.getString("typeTransport")),
+                            rs.getDouble("prixAchat"),
+                            rs.getDouble("prixVente"),
+                            rs.getTimestamp("dateVente"),
+                            StatutBillet.valueOf(rs.getString("statutBillet"))
+                    );
+                    b.setTrajet(trajetDAO.getTrajetById(rs.getObject("trajet_id", UUID.class)));
+                    billets.add(b);
+                }
+        }catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return billets;
+    }
+    
+    
+    
 }

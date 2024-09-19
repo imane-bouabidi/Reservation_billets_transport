@@ -2,10 +2,13 @@ package com.reservation_billet_transport.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.UUID;
 
 import com.reservation_billet_transport.database.DbConnection;
+import com.reservation_billet_transport.enums.StatutBillet;
+import com.reservation_billet_transport.enums.TypeTransport;
 import com.reservation_billet_transport.models.*;
 
 public class VilleDAO {
@@ -43,4 +46,23 @@ public class VilleDAO {
 			e.printStackTrace();
 		}
 	}
+	
+    public Ville getVilleById(UUID id) {
+        String query = "SELECT * FROM ville WHERE id = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setObject(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                return new Ville(
+                    rs.getObject("id", UUID.class),
+                    rs.getString("name")
+                );
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
 }

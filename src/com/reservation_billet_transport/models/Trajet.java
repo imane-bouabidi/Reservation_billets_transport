@@ -1,6 +1,5 @@
 package com.reservation_billet_transport.models;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -10,19 +9,23 @@ public class Trajet {
 	private Ville villeArrive;
 	private Date dateDepart;
 	private Date dateArrive;
-	private ArrayList<Billet> billets;
 	
 	
 	public Trajet() {
 	}
 	
-	public Trajet(UUID id, Date dateDepart, Date dateArrive) {
+	
+	public Trajet(UUID id, Ville villeDepart, Ville villeArrive, Date dateDepart, Date dateArrive) {
 		this.id = id;
+		this.villeDepart = villeDepart;
+		this.villeArrive = villeArrive;
 		this.dateDepart = dateDepart;
 		this.dateArrive = dateArrive;
 	}
-	
-	
+
+
+
+
 	public UUID getId() {
 		return id;
 	}
@@ -53,12 +56,7 @@ public class Trajet {
 	public void setDateArrive(Date dateArrive) {
 		this.dateArrive = dateArrive;
 	}
-	public ArrayList<Billet> getBillets() {
-		return billets;
-	}
-	public void setBillets(ArrayList<Billet> billets) {
-		this.billets = billets;
-	}
+
 	
 	
 }
